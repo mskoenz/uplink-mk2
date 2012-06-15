@@ -18,30 +18,30 @@ namespace eeprom
     void write(data_struct & data)
     {
         //------------------- profil & display pos -------------------
-        data.disk->write(profil_adr, 0);
-        data.disk->write(disp_pos_adr, 0);
-        
-        //------------------- lights -------------------
-        data.disk->write(lcd_pwm_adr, 120);
-        data.disk->write(lcd_pot_adr, 115);
-        data.disk->write(led_high_adr, 30);
-        data.disk->write(led_low_adr, 1);
-        
-        //------------------- mapping -------------------
-        for(byte i = 0; i < cnst::n_prof; ++i)
-        {
-            data.disk->write(map_start_adr + i, i);
-        }
-        //------------------- keys -------------------
-        data.disk->write(menu_key_adr, 19);
-        for(byte prof = 0; prof < cnst::n_prof; ++prof)
-        {
-            for(byte i = 0; i < cnst::end_key; ++i)
-            {
-                data.disk->write_key(prof, i, prof + 4);
-                data.disk->write_mod(prof, i, 0);
-            }
-        }
+        //~ data.disk->write(profil_adr, 0);
+        //~ data.disk->write(disp_pos_adr, 0);
+        //~ 
+        //~ //------------------- lights -------------------
+        //~ data.disk->write(lcd_pwm_adr, 120);
+        //~ data.disk->write(lcd_pot_adr, 115);
+        //~ data.disk->write(led_high_adr, 30);
+        //~ data.disk->write(led_low_adr, 1);
+        //~ 
+        //~ //------------------- mapping -------------------
+        //~ for(byte i = 0; i < cnst::n_prof; ++i)
+        //~ {
+            //~ data.disk->write(map_start_adr + i, i);
+        //~ }
+        //~ //------------------- keys -------------------
+        //~ data.disk->write(menu_key_adr, 19);
+        //~ for(byte prof = 0; prof < cnst::n_prof; ++prof)
+        //~ {
+            //~ for(byte i = 0; i < cnst::end_key; ++i)
+            //~ {
+                //~ data.disk->write_key(prof, i, prof + 4);
+                //~ data.disk->write_mod(prof, i, 0);
+            //~ }
+        //~ }
         //------------------- names -------------------
         byte name[] = "tier a";
         for(byte pos = 0; pos < cnst::n_prof; ++pos)

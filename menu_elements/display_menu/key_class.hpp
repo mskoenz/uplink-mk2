@@ -33,7 +33,7 @@ public:
         #elif defined SIDE_ATMEGA
             data->lcd->print(text::get(text::keyPressed));
             data->lcd->setCursor(10, 0);
-            data->lcd->print(data->tier_name[data->profil]);
+            data->lcd->print(data->tier_name[data->map[data->profil]]);
         #endif
         
         
@@ -51,7 +51,7 @@ public:
             if(!data->in_menu)
             {
                 data->lcd->setCursor(10, 0);
-                data->lcd->print(data->tier_name[data->profil]);                
+                data->lcd->print(data->tier_name[data->map[data->profil]]);                
             }
             
             data->lcd->setCursor(2, 1);

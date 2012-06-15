@@ -109,10 +109,10 @@ public:
         inline void print()
         {
             data->lcd->setCursor(0, 1);
-            data->lcd->print(data->tier_name[tier2]);
+            data->lcd->print(data->tier_name[data->map[tier2]]);
             data->lcd->print("<-->");
             data->lcd->setCursor(10, 1);
-            data->lcd->print(data->tier_name[tier1]);
+            data->lcd->print(data->tier_name[data->map[tier1]]);
         }
     #endif
     private:

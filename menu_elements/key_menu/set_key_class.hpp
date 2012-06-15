@@ -56,7 +56,7 @@ public:
             #ifdef SIDE_ATMEGA
                 data->lcd->setCursor(9, 1);
                 if(newKey > usb::base)
-                    data->lcd->print(data->tier_name[data->small_prof()*cnst::n_tier + (newKey - usb::tier0)]);
+                    data->lcd->print(data->tier_name[data->map[data->small_prof()*cnst::n_tier + (newKey - usb::tier0)]]);
                 else
                     data->lcd->print(keys::get(newKey));
             #endif
@@ -75,7 +75,7 @@ public:
             #ifdef SIDE_ATMEGA
                 data->lcd->setCursor(9, 1);
                 if(newKey > usb::base)
-                    data->lcd->print(data->tier_name[data->small_prof()*cnst::n_tier + (newKey - usb::tier0)]);
+                    data->lcd->print(data->tier_name[data->map[data->small_prof()*cnst::n_tier + (newKey - usb::tier0)]]);
                 else
                     data->lcd->print(keys::get(newKey));
             #endif
@@ -295,12 +295,12 @@ public:
         inline void print()
         {
             data->lcd->setCursor(10, 0);
-            data->lcd->print(data->tier_name[data->profil]);
+            data->lcd->print(data->tier_name[data->map[data->profil]]);
             data->lcd->setCursor(2, 1);
             data->lcd->print(mods::get(newMod));
             data->lcd->setCursor(9, 1);
             if(newKey > usb::base)
-                data->lcd->print(data->tier_name[data->small_prof() * cnst::n_tier + (newKey - usb::tier0)]);
+                data->lcd->print(data->tier_name[data->map[data->small_prof() * cnst::n_tier + (newKey - usb::tier0)]]);
             else
                 data->lcd->print(keys::get(newKey));
         }

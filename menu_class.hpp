@@ -44,10 +44,10 @@ public:
         menu_element_class * set_menu_key = new menu_key_class(data_in);
         
         
-        main_menu->set_neighbours(disp_menu, NULL);
+        main_menu->set_neighbours(profil_menu, NULL);
+        profil_menu->set_neighbours(disp_menu, switch_prof);
         disp_menu->set_neighbours(light_menu, key);
-        light_menu->set_neighbours(profil_menu, bright);
-        profil_menu->set_neighbours(key_menu, switch_prof);
+        light_menu->set_neighbours(key_menu, bright);
         key_menu->set_neighbours(main_menu, set_key);
         
         bright->set_neighbours(NULL, shutter);

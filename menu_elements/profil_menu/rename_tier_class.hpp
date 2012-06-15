@@ -79,7 +79,7 @@ public:
     {
         if(locked)
         {
-            byte chr = data->tier_name[target][pos];
+            byte chr = data->tier_name[data->map[target]][pos];
             
             if(chr != 122)
                 ++chr;
@@ -91,7 +91,7 @@ public:
                 chr = 97;
             
             
-            data->tier_name[target][pos] = chr;    
+            data->tier_name[data->map[target]][pos] = chr;    
             #ifdef SIDE_ATMEGA
                     print();
             #endif
@@ -109,7 +109,7 @@ public:
     {
         if(locked)
         {
-            byte chr = data->tier_name[target][pos];
+            byte chr = data->tier_name[data->map[target]][pos];
             
             if(chr != 32)
                 --chr;
@@ -121,7 +121,7 @@ public:
                 chr = 90;
             
             
-            data->tier_name[target][pos] = chr;
+            data->tier_name[data->map[target]][pos] = chr;
             #ifdef SIDE_ATMEGA
                 print();
             #endif
@@ -141,9 +141,9 @@ public:
         if(locked)
         {
             locked = false;
-            for(byte i = 0; i < cnst::name_length; ++i)
+            for(byte i = 0; i < cnst::name_length - 1; ++i)
             {
-                data->tier_name[pos][i] = backup[i];
+                data->tier_name[data->map[target]][i] = backup[i];
             }
         }
         #ifdef SIDE_ATMEGA
@@ -158,9 +158,12 @@ public:
         if(locked)
         {
             #ifdef CORE_ATMEGA
-                for(byte i = 0; i < cnst::name_length; ++i)
-                    data->disk->write(eeprom::name_start_adr + pos * cnst::name_length + i
-                                    , data->tier_name[pos][i]);
+                for(byte i = 0; i < cnst::name_length - 1; ++i)
+                {
+                    data->disk->write(eeprom::name_start_adr + data->map[target] * cnst::name_length + i
+                                    , data->tier_name[data->map[target]][i]);
+                }
+                
                 delayMs(cnst::watch_time);
             #elif defined SIDE_ATMEGA
                 data->lcd->clear();
@@ -178,7 +181,7 @@ public:
             locked = true;
             for(byte i = 0; i < cnst::name_length - 1; ++i)
             {
-                backup[i] = data->tier_name[pos][i];
+                backup[i] = data->tier_name[data->map[target]][i];
             }
             
             
@@ -205,17 +208,17 @@ public:
                     if(i == pos)
                     {
                         data->lcd->print("<");
-                        data->lcd->write(data->tier_name[target][i]);
+                        data->lcd->write(data->tier_name[data->map[target]][i]);
                         data->lcd->print(">");
                     }
                     else
-                        data->lcd->write(data->tier_name[target][i]);
+                        data->lcd->write(data->tier_name[data->map[target]][i]);
                 }
             }
             else
             {
                 data->lcd->setCursor(5, 1);
-                data->lcd->print(data->tier_name[target]);
+                data->lcd->print(data->tier_name[data->map[target]]);
             }
             data->lcd->print("      ");
         }
@@ -224,7 +227,7 @@ public:
         byte target;
         byte pos;
         bool locked;
-        byte backup[cnst::name_length];
+        byte backup[cnst::name_length - 1];
 };
 
 #endif //__RENAME_TIER_CLASS_HEADER
