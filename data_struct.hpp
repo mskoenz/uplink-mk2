@@ -80,7 +80,7 @@ struct data_struct
     }
     inline byte pin_to_profil(byte prof)
     {
-        if(small_prof(prof) == 0)
+        if(small_prof(prof) == 0) 
             return 10;
         if(small_prof(prof) == 1)
             return 9;
